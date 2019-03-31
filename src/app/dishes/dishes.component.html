@@ -1,0 +1,29 @@
+<div class="container pl-0 pr-0 pl-sm-1 pr-sm-1">
+    <h2 class="text-center d-sm-none">Dishes list</h2>
+    <div class="row justify-content-center">
+        <a class="nav-link" routerLink="/edit-food/mbc4KgR5KtNYpOeoMI9B"  routerLinkActive="active">Редактировать food</a>
+        <div class="col-md-10 col-sm-12  pl-0 pr-0 pl-sm-1 pr-sm-1">
+            <table matSort (matSortChange)="sortData($event)" class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th mat-sort-header="name">Dessert (100g)</th>
+                    <th mat-sort-header="calories">Calories</th>
+                    <th mat-sort-header="fat" class="d-sm-table-cell d-none">Fat (g)</th>
+                    <th mat-sort-header="carbs"  class="d-sm-table-cell d-none">Carbs (g)</th>
+                    <th mat-sort-header="protein"  class="d-sm-table-cell d-none">Protein (g)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let dessert of sortedData">
+                    <td>{{dessert.name}}</td>
+                    <td>{{dessert.calories}}</td>
+                    <td class="d-sm-table-cell d-none">{{dessert.fat}}</td>
+                    <td class="d-sm-table-cell d-none">{{dessert.carbs}}</td>
+                    <td class="d-sm-table-cell d-none">{{dessert.protein}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

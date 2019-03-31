@@ -1,0 +1,126 @@
+<div class="container pl-sm-1 pr-sm-1">
+  <h2 class="text-center " *ngIf="foodId == ''">Add food</h2>
+  <h2 class="text-center " *ngIf="foodId != ''">Edit food ({{foodId}})</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12" >
+      <div class="card text-white bg-danger mb-3" *ngIf="actionError">
+        <div class="card-body">
+          <p class="card-text small">{{actionError}}</p>
+        </div>
+      </div>
+
+      <form #foodForm="ngForm" (ngSubmit)="onSubmit()">
+        <fieldset [disabled]="submitted">
+          <div class="form-group">
+            <label for="name">Email address</label>
+            <input type="text"
+                   class="form-control"
+                   id="name"
+                   name="name"
+                   placeholder="Enter food name"
+                   required
+                   aria-invalid="true"
+                   [(ngModel)]="model.name"
+                   #name="ngModel"
+                   [ngClass]="{'is-invalid': foodForm.submitted && name.invalid}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="protein">Proteins</label>
+            <input type="number"
+                   class="form-control"
+                   id="protein"
+                   name="protein"
+                   required
+                   aria-invalid="true"
+                   [(ngModel)]="model.protein"
+                   #protein="ngModel"
+                   [ngClass]="{'is-invalid': foodForm.submitted && protein.invalid}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="fat">Fat</label>
+            <input type="number"
+                   class="form-control"
+                   id="fat"
+                   name="fat"
+                   required
+                   aria-invalid="true"
+                   [(ngModel)]="model.fat"
+                   #fat="ngModel"
+                   [ngClass]="{'is-invalid': foodForm.submitted && fat.invalid}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="carbohydrate">Carbohydrates</label>
+            <input type="number"
+                   class="form-control"
+                   id="carbohydrate"
+                   name="carbohydrate"
+                   required
+                   aria-invalid="true"
+                   [(ngModel)]="model.carbohydrate"
+                   #carbohydrate="ngModel"
+                   [ngClass]="{'is-invalid': foodForm.submitted && carbohydrate.invalid}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="calorias">Calorias</label>
+            <input type="number"
+                   class="form-control"
+                   id="calorias"
+                   name="calorias"
+                   required
+                   number
+                   aria-invalid="true"
+                   [(ngModel)]="model.calorias"
+                   #calorias="ngModel"
+                   [ngClass]="{'is-invalid': foodForm.submitted && calorias.invalid}"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="tsp_weight">Weight of tea spoon</label>
+            <input type="number"
+                   class="form-control"
+                   id="tsp_weight"
+                   name="tsp_weight"
+                   required
+                   aria-invalid="true"
+                   [(ngModel)]="model.tsp_weight"
+                   #tsp_weight="ngModel"
+                   [ngClass]="{'is-invalid': foodForm.submitted && tsp_weight.invalid}"
+            >
+            <small class="form-text text-muted">Keep it 0 if not used</small>
+          </div>
+
+          <div class="form-group">
+            <label for="tbsp_weight">Weight of table spoon</label>
+            <input type="number"
+                   class="form-control"
+                   id="tbsp_weight"
+                   name="tbsp_weight"
+                   required
+                   aria-invalid="true"
+                   [(ngModel)]="model.tbsp_weight"
+                   #tbsp_weight="ngModel"
+                   [ngClass]="{'is-invalid': foodForm.submitted && tbsp_weight.invalid}"
+            >
+            <small class="form-text text-muted">Keep it 0 if not used</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="!foodForm.form.valid">
+            <span *ngIf="foodId === ''">Add food</span>
+            <span *ngIf="foodId !== ''">Update food</span>
+            <i class="fas fa-spinner fa-spin" *ngIf="submitted"></i>
+          </button>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
