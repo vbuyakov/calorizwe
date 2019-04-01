@@ -7,8 +7,8 @@ export class Food {
     name_lk: string = '';
     protein: number = 0;
     fat: number = 0;
-    carbohydrate: number = 0;
-    calorias: number = 0;
+    carb: number = 0;
+    calories: number = 0;
     tsp_weight: number = 0;
     tbsp_weight: number = 0;
     need_clarify: boolean = true;
@@ -21,7 +21,7 @@ export class Food {
 
     public prepareToInsert() {
         this.name_lk = this.name.toLowerCase();
-        this.need_clarify = !(this.calorias > 0 && (this.carbohydrate > 0 || this.fat > 0 || this.protein > 0));
+        this.need_clarify = !(this.calories > 0 && (this.carb > 0 || this.fat > 0 || this.protein > 0));
         return JSON.parse(JSON.stringify(this));
     }
 }
@@ -42,7 +42,7 @@ export class FoodService {
 
     addFood(food: Food) {
         const foodToSave = new Food(food);
-        food.added_by = this.authSrv.userId;
+        foodToSave.added_by = this.authSrv.userId;
         return this.dishesCollection.add(foodToSave.prepareToInsert())
             .catch((err) => {
                 throw err.message;

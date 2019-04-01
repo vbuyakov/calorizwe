@@ -24,6 +24,7 @@ export class DishesDetailsComponent implements OnInit {
             this.foodSrv.addFood(this.model as Food)
                 .then((res) => {
                     this.foodId = res.id;
+                    this.router.navigateByUrl('/dishes');
                 })
                 .catch((errorMesssage) => {
                     this.actionError = errorMesssage;
