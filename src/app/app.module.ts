@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatTableModule, MatSortModule} from '@angular/material';
+import {MatButtonModule, MatTableModule, MatSortModule, MatExpansionModule, MatSlideToggleModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
 
@@ -47,7 +47,9 @@ import {FoodService} from './services/food.service';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         AngularFirestoreModule,
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        MatExpansionModule,
+        MatSlideToggleModule
     ],
     providers: [AuthService, FoodService],
     bootstrap: [AppComponent]

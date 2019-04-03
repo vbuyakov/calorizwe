@@ -14,8 +14,10 @@ class FoodData extends Food {
 export class DishesDetailsComponent implements OnInit {
     model = new FoodData();
     submitted = false;
+    deleted = false;
     actionError = '';
     foodId: string = '';
+    isGrantToDelete: boolean = true; /// vTODO:  Should chack that owner or admin
 
     onSubmit() {
         this.submitted = true;
@@ -68,5 +70,14 @@ export class DishesDetailsComponent implements OnInit {
                     });
             }
         });
+    }
+    deleteItem(id: string) {
+        this.deleted = true;
+        this.submitted = true;
+        this.foodSrv.deleteFood(id).then(
+            () => {
+                this.router.navigateByUrl('/dishes');
+            }
+        );
     }
 }

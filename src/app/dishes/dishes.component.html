@@ -1,25 +1,60 @@
 <div class="container pl-0 pr-0 pl-sm-1 pr-sm-1">
-    <h2 class="text-center d-sm-none">Dishes list</h2>
+    <h2 class="text-center d-none d-sm-block">Dishes list
+        <a routerLink="/add-food" routerLinkActive="active" class="btn btn-info"
+           title="Add new food in the dishes list"><i class="fas fa-plus"></i></a>
+    </h2>
     <div class="row justify-content-center">
-        <a class="nav-link" routerLink="/edit-food/mbc4KgR5KtNYpOeoMI9B"  routerLinkActive="active">Редактировать food</a>
         <div class="col-md-10 col-sm-12  pl-0 pr-0 pl-sm-1 pr-sm-1">
+            <div class="mb-2">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="filterPanelOpenState = true"
+                                         (closed)="filterPanelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="fas fa-filter"></i>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{filterTitle}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-slide-toggle class="mr-3" [checked]="filter.unfilled" (change)="filterControlChanged($event)" aria-label="unfilled">Show unfilled</mat-slide-toggle>
+                        <mat-slide-toggle class="mr-3" [checked]="filter.filled" (change)="filterControlChanged($event)" aria-label="filled">Show filled</mat-slide-toggle>
+                        <mat-slide-toggle class="mr-3" [checked]="filter.createdByMe" (change)="filterControlChanged($event)" aria-label="createdByMe">Show created by me</mat-slide-toggle>
+                        <mat-slide-toggle [checked]="filter.createdByOther" (change)="filterControlChanged($event)" aria-label="createdByOther">Show created by other</mat-slide-toggle>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
             <table matSort (matSortChange)="sortData($event)" class="table">
                 <thead class="thead-dark">
                 <tr>
                     <th mat-sort-header="name">Dessert (100g)</th>
-                    <th mat-sort-header="calories">Calories</th>
+                    <th mat-sort-header="protein" class="d-sm-table-cell d-none">Protein (g)</th>
                     <th mat-sort-header="fat" class="d-sm-table-cell d-none">Fat (g)</th>
-                    <th mat-sort-header="carbs"  class="d-sm-table-cell d-none">Carbs (g)</th>
-                    <th mat-sort-header="protein"  class="d-sm-table-cell d-none">Protein (g)</th>
+                    <th mat-sort-header="carb" class="d-sm-table-cell d-none">Carbs (g)</th>
+                    <th mat-sort-header="calories">Calories</th>
+                    <th class="d-sm-table-cell d-none"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let dessert of sortedData">
-                    <td>{{dessert.name}}</td>
-                    <td>{{dessert.calories}}</td>
-                    <td class="d-sm-table-cell d-none">{{dessert.fat}}</td>
-                    <td class="d-sm-table-cell d-none">{{dessert.carbs}}</td>
-                    <td class="d-sm-table-cell d-none">{{dessert.protein}}</td>
+                <tr *ngFor="let food of sortedData" [ngClass]="{'bg-warning': food.need_clarify}">
+                    <td>
+                        <a routerLink="/edit-food/{{food.id}}" routerLinkActive="active"
+                           alt="Edit food"
+                        >
+                            {{food.name}}
+                        </a>
+                    </td>
+                    <td class="d-sm-table-cell d-none">{{food.protein}}</td>
+                    <td class="d-sm-table-cell d-none">{{food.fat}}</td>
+                    <td class="d-sm-table-cell d-none">{{food.carb}}</td>
+                    <td>{{food.calories}}</td>
+                    <td class="d-sm-table-cell d-none">
+                        <a routerLink="/edit-food/{{food.id}}" routerLinkActive="active" title="Edit food">
+                            <i class="far fa-edit"></i>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

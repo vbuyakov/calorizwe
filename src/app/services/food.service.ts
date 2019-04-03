@@ -3,6 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firest
 import {AuthService} from './auth.service';
 
 export class Food {
+    id: string;
     name: string = '';
     name_lk: string = '';
     protein: number = 0;
@@ -61,5 +62,9 @@ export class FoodService {
     getFood(id: string) {
         const foodDoc = this.dishesCollection.doc<Food>(id);
         return foodDoc.get();
+    }
+
+    deleteFood(id: string) {
+        return this.dishesCollection.doc<Food>(id).delete();
     }
 }

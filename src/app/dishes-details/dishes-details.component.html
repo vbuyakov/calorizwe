@@ -1,8 +1,13 @@
 <div class="container pl-sm-1 pr-sm-1">
   <h2 class="text-center " *ngIf="foodId == ''">Add food</h2>
-  <h2 class="text-center " *ngIf="foodId != ''">Edit food ({{foodId}})</h2>
+  <h2 class="text-center " *ngIf="foodId != ''">Edit food</h2>
+
+
   <div class="row justify-content-center">
     <div class="col-md-6 col-sm-12" >
+        <div class="text-center">
+            <a  routerLink="/dishes" routerLinkActive="active">All Dishes</a>
+        </div>
       <div class="card text-white bg-danger mb-3" *ngIf="actionError">
         <div class="card-body">
           <p class="card-text small">{{actionError}}</p>
@@ -118,6 +123,14 @@
             <span *ngIf="foodId !== ''">Update food</span>
             <i class="fas fa-spinner fa-spin" *ngIf="submitted"></i>
           </button>
+
+            <button type="button" *ngIf="foodId !== '' && isGrantToDelete" class="mt-5 btn btn-danger btn-block"
+            (click)="deleteItem(foodId)"
+                    [disabled]="deleted"
+            >
+                Delete this food <i class="fas fa-trash"></i>
+                <i class="ml-1 fas fa-spinner fa-spin" *ngIf="deleted"></i>
+            </button>
 
         </fieldset>
       </form>
